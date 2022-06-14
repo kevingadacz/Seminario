@@ -1,6 +1,6 @@
 package Modelo.SistemaDeTurnosPeluqueria;
 
-import java.Cliente.Cliente;
+import Modelo.Cliente.Cliente;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
 
