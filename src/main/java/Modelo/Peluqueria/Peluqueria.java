@@ -1,6 +1,7 @@
 package Modelo.Peluqueria;
 
 import Modelo.Calificacion.Calificacion;
+import Modelo.Cliente.Cliente;
 import Modelo.Notificable.IFormaDeNotificar;
 import Modelo.Notificable.INotificable;
 import Modelo.Notificable.Whatsapp;
@@ -9,6 +10,7 @@ import Modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Peluqueria implements INotificable {
@@ -64,7 +66,7 @@ public class Peluqueria implements INotificable {
         this.servicios.add(servicio);
     }
     public void informarInasistencia(Turno turno){
-        turno.getCliente().penalizar(turno);
+        //turno.getCliente().penalizar(turno);
     }
 
     public void calificar(Calificacion calificacion) {
@@ -92,9 +94,44 @@ public class Peluqueria implements INotificable {
         turnos.add(turno);
     }
 
+    public void solicitarTurno(Turno turno) throws Exception {
+        if (turnoDisponible(turno)) {
+            agregarTurno(turno);
+            turno.getCliente().confirmarTurno(turno);
+        }
+        else{
+            throw new Exception("Turno no disponible");
+        }
+    }
+
+    private boolean mismoDia(LocalDateTime dia1,LocalDateTime dia2) {
+        return dia1 == dia2;
+    }
+
+    private boolean turnoDisponible(Turno turno) {
+        //Esto podria estar en un ValidadorDeTurnos
+        for (Turno unTurno: turnos) {
+            if(mismoDia(unTurno.getDia(),turno.getDia()))
+                return false;
+        }
+        return true;
+    }
+
     @Override
     public void notificar(String mensaje) {
         this.formaDeNotificar.notificar(mensaje);
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Peluqueria that = (Peluqueria) o;
+        return nombre.equals(that.nombre) && direccion.equals(that.direccion) && telefono.equals(that.telefono) && mail.equals(that.mail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, direccion, telefono, mail);
     }
 }

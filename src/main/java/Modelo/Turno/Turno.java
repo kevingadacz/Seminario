@@ -7,6 +7,7 @@ import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Turno {
     private int ID;
@@ -22,7 +23,6 @@ public class Turno {
         this.estadoTurno = new Solicitado(this);
         this.peluqueria = peluqueria;
         this.cliente = cliente;
-        peluqueria.agregarTurno(this);
     }
 
     public int getID() {
@@ -57,5 +57,16 @@ public class Turno {
         estadoTurno.cancelarTurno();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Turno turno = (Turno) o;
+        return dia.equals(turno.dia) && servicio.equals(turno.servicio)  && peluqueria.equals(turno.peluqueria) && cliente.equals(turno.cliente);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(dia, servicio, estadoTurno, peluqueria, cliente);
+    }
 }

@@ -10,8 +10,8 @@ public class Cancelado implements IEstadoTurno {
     }
 
     @Override
-    public void cancelarTurno() {
-
+    public void cancelarTurno() throws Exception {
+        throw new Exception("El turno ya esta cancelado");
     }
 
     @Override
@@ -22,5 +22,9 @@ public class Cancelado implements IEstadoTurno {
     @Override
     public void ausentarTurno() {
 
+    }
+
+    public boolean mismaClase(IEstadoTurno estadoTurno) {
+        return estadoTurno.getClass() == Cancelado.class;
     }
 }
