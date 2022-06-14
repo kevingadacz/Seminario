@@ -8,7 +8,7 @@ import Modelo.Peluqueria.Peluqueria;
 import Modelo.Penalizacion.Penalizacion;
 import Modelo.Servicio.Servicio;
 import Modelo.Turno.Turno;
-import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -79,8 +79,8 @@ public class Cliente implements INotificable {
         return turno;
      }
 
-    public void cancelarTurno(Turno turno){
-        turno.cancelar();
+    public void cancelarTurno(Turno turno) throws Exception {
+        turno.cancelarTurno();
     };
 
     /*public void penalizar(Turno turno) {
@@ -91,6 +91,14 @@ public class Cliente implements INotificable {
 
     public void calificarPeluqueria(Peluqueria peluqueria, int puntuacion, String comentario){
         peluqueria.calificar(new Calificacion(puntuacion, comentario));
+    }
+
+    public void asistirAlTurno(Turno turno) {
+        //buscar el turno qe me llega por parametro entre los turnos que tiene este cliente
+        //y llamar al finalizarTurno
+
+       // Turno turnoEncontrado = encontrarTurno(this.turnos,turno);
+        //turnoEncontrado.finalizarTurno();
     }
 
     @Override

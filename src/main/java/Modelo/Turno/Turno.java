@@ -49,12 +49,20 @@ public class Turno {
         return cliente;
     }
 
-    public void cambiarEstado(IEstadoTurno estadoTurno){
+    private void cambiarEstado(IEstadoTurno estadoTurno){
         this.estadoTurno = estadoTurno;
     }
 
-    public void cancelar(){
+    public void cancelarTurno() throws Exception {
         estadoTurno.cancelarTurno();
+    }
+
+    public void finalizarTurno() {
+
+    }
+
+    public void ausentarTurno() {
+
     }
 
     @Override

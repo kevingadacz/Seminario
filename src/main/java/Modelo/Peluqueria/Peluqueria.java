@@ -1,7 +1,6 @@
 package Modelo.Peluqueria;
 
 import Modelo.Calificacion.Calificacion;
-import Modelo.Cliente.Cliente;
 import Modelo.Notificable.IFormaDeNotificar;
 import Modelo.Notificable.INotificable;
 import Modelo.Notificable.Whatsapp;
@@ -86,8 +85,8 @@ public class Peluqueria implements INotificable {
         for (Turno turno: turnos) {if((turno.getDia().getDayOfYear()==dia.getDayOfYear())&&(turno.getDia().getYear() == dia.getYear()))turnosbuscados.add(turno);}
         return turnosbuscados;
     }
-    public void cancelarTurno(Turno turno){
-        turno.cancelar();
+    public void cancelarTurno(Turno turno) throws Exception {
+        turno.cancelarTurno();
     }
 
     public void agregarTurno(Turno turno) {
