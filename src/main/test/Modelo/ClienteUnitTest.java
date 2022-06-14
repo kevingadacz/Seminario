@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.EstadoTurno.Cancelado;
 import Modelo.EstadoTurno.Finalizado;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
@@ -10,8 +11,18 @@ import org.junit.Test;
 import Modelo.Cliente.Cliente;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class ClienteUnitTest {
+
+    private Turno buscarTurnoDePeluqueria(Turno turno, Peluqueria peluqueria) throws Exception {
+        ArrayList<Turno> turnos = peluqueria.getTurnos();
+        for (Turno unTurno : turnos) {
+            if (turno == unTurno) return unTurno;
+        }
+        throw new Exception("La peluqueria no posee ese turno");
+    }
+
     @Test
     public void Cliente_ParametrosValidos_SeGeneraunClienteValido() {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
@@ -79,6 +90,24 @@ public class ClienteUnitTest {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
             cliente.asistirAlTurno(turno);
             Assert.assertTrue(turno.getEstadoTurno() instanceof Finalizado);
+            Assert.assertTrue(buscarTurnoDePeluqueria(turno, peluqueria).getEstadoTurno() instanceof  Finalizado);
+        }
+        catch (Exception ex) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void CancelarElTurno_UnClienteSolicitoUnTurnoEnUnaPeluqueria_ElTurnoCambiaDeEstadoACancelado() {
+        Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
+        LocalDateTime fecha = LocalDateTime.now();
+        Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
+        Servicio servicio = new Servicio(5,"Corte de pelo");
+        try {
+            Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
+            cliente.cancelarTurno(turno);
+            Assert.assertTrue(turno.getEstadoTurno() instanceof Cancelado);
+            Assert.assertTrue(buscarTurnoDePeluqueria(turno, peluqueria).getEstadoTurno() instanceof  Cancelado);
         }
         catch (Exception ex) {
             Assert.fail();

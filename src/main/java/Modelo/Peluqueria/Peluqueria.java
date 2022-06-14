@@ -86,7 +86,24 @@ public class Peluqueria implements INotificable {
         return turnosbuscados;
     }
     public void cancelarTurno(Turno turno) throws Exception {
-        turno.cancelarTurno();
+        for(Turno unturno : turnos)if(turno == unturno) {
+            unturno.cancelarTurno();
+            unturno.getCliente().cancelarTurnoPorPeluqueria(turno);
+        }
+        formaDeNotificar.notificar("El turno fue cancelado");
+    }
+
+    public void cancelarTurnoPedidoPorCliente(Turno turno) throws Exception {
+        for(Turno unturno : turnos)if(turno == unturno) {
+            unturno.cancelarTurno();
+        }
+        formaDeNotificar.notificar("El turno fue cancelado");
+    }
+
+
+    public void finalizarTurno(Turno turno) throws Exception {
+        for(Turno unturno : turnos)if(turno == unturno) unturno.finalizarTurno();;
+        formaDeNotificar.notificar("El turno fue finalizado");
     }
 
     public void agregarTurno(Turno turno) {
@@ -95,22 +112,25 @@ public class Peluqueria implements INotificable {
 
     public void solicitarTurno(Turno turno) throws Exception {
         if (turnoDisponible(turno)) {
+            formaDeNotificar.notificar("Se ha solicitado un turno");
             agregarTurno(turno);
             turno.getCliente().confirmarTurno(turno);
         }
         else{
             throw new Exception("Turno no disponible");
         }
+        formaDeNotificar.notificar("Se ha confirmado un turno");
     }
 
-    private boolean mismoDia(LocalDateTime dia1,LocalDateTime dia2) {
-        return dia1 == dia2;
+    private boolean mismoDia(LocalDateTime dia1,LocalDateTime dia2, long duracion1, long duracion2) {
+        return dia2.isBefore(dia1.plusMinutes(duracion1)) && dia2.plusMinutes(duracion2).isAfter(dia1);
+
     }
 
     private boolean turnoDisponible(Turno turno) {
         //Esto podria estar en un ValidadorDeTurnos
         for (Turno unTurno: turnos) {
-            if(mismoDia(unTurno.getDia(),turno.getDia()))
+            if(mismoDia(unTurno.getDia(),turno.getDia(),turno.getServicio().getDuracion(),unTurno.getServicio().getDuracion()))
                 return false;
         }
         return true;

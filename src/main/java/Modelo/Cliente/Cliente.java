@@ -70,17 +70,28 @@ public class Cliente implements INotificable {
 
     public void confirmarTurno(Turno turno){
         turnos.add(turno);
-        formaDeNotificar.notificar("El turno fue confirmado por la peluqueria");
+        formaDeNotificar.notificar("El turno fue confirmado ");
     }
 
     public Turno solicitarTurno(LocalDateTime dia , Peluqueria peluqueria, Servicio servicio ) throws Exception{
         Turno turno = new Turno(this, dia, peluqueria, servicio);
+        formaDeNotificar.notificar("Haz solicitado un turno");
         peluqueria.solicitarTurno(turno);
         return turno;
      }
 
     public void cancelarTurno(Turno turno) throws Exception {
-        turno.cancelarTurno();
+        for(Turno unturno : turnos)if(turno == unturno) {
+            unturno.cancelarTurno();
+            unturno.getPeluqueria().cancelarTurnoPedidoPorCliente(unturno);
+        }
+        formaDeNotificar.notificar("El turno fue cancelado");
+    };
+
+    public void cancelarTurnoPorPeluqueria(Turno turno) throws Exception {
+        for(Turno unturno : turnos)if(turno == unturno) {
+            unturno.cancelarTurno();}
+        formaDeNotificar.notificar("El turno fue cancelado");
     };
 
     /*public void penalizar(Turno turno) {
@@ -93,12 +104,12 @@ public class Cliente implements INotificable {
         peluqueria.calificar(new Calificacion(puntuacion, comentario));
     }
 
-    public void asistirAlTurno(Turno turno) {
-        //buscar el turno qe me llega por parametro entre los turnos que tiene este cliente
-        //y llamar al finalizarTurno
-
-       // Turno turnoEncontrado = encontrarTurno(this.turnos,turno);
-        //turnoEncontrado.finalizarTurno();
+    public void asistirAlTurno(Turno turno) throws Exception {
+        for(Turno unturno : turnos)if(turno == unturno){
+            unturno.finalizarTurno();
+            formaDeNotificar.notificar("El turno fue finalizado");
+            unturno.getPeluqueria().finalizarTurno(unturno);
+        }
     }
 
     @Override

@@ -9,6 +9,6 @@ public class Mail implements IFormaDeNotificar{
 
     @Override
     public void notificar(String mensaje ) {
-        System.out.println("Se envia un mensaje: "+mensaje+" al email de direccion:"+mail);
+        System.out.println("Se envia un mensaje <"+mensaje+"> al email de direccion <"+mail+">");
     }
 }

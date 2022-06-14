@@ -1,8 +1,7 @@
 package Modelo.Turno;
 
 import Modelo.Cliente.Cliente;
-import Modelo.EstadoTurno.IEstadoTurno;
-import Modelo.EstadoTurno.Solicitado;
+import Modelo.EstadoTurno.*;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
 
@@ -54,15 +53,15 @@ public class Turno {
     }
 
     public void cancelarTurno() throws Exception {
-        estadoTurno.cancelarTurno();
+        cambiarEstado(new Cancelado(this));
     }
 
     public void finalizarTurno() {
-
+        cambiarEstado(new Finalizado(this));
     }
 
     public void ausentarTurno() {
-
+        cambiarEstado(new Ausentado(this));
     }
 
     @Override
