@@ -1,4 +1,4 @@
-package java.Cliente;
+package Modelo.Cliente;
 
 import Modelo.Calificacion.Calificacion;
 import Modelo.Notificable.IFormaDeNotificar;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Cliente implements INotificable {
-    private int ID;
+    private int Id;
     private String nombre;
     private String apellido;
     private String mail;
@@ -33,7 +33,7 @@ public class Cliente implements INotificable {
     }
 
     public int getID() {
-        return ID;
+        return Id;
     }
 
     public String getNombre() {

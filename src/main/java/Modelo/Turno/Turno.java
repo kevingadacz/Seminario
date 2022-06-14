@@ -1,6 +1,6 @@
 package Modelo.Turno;
 
-import java.Cliente.Cliente;
+import Modelo.Cliente.Cliente;
 import Modelo.EstadoTurno.IEstadoTurno;
 import Modelo.EstadoTurno.Solicitado;
 import Modelo.Peluqueria.Peluqueria;
