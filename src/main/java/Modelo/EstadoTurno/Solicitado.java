@@ -10,17 +10,17 @@ public class Solicitado implements IEstadoTurno {
     }
 
     @Override
-    public void cancelarTurno() {
-        turno.cambiarEstado(new Cancelado(turno));
+    public void cancelarTurno() throws Exception {
+        turno.cancelarTurno();
     }
 
     @Override
     public void finalizarTurno() {
-        turno.cambiarEstado(new Finalizado(turno));
+        turno.finalizarTurno();
     }
 
     @Override
     public void ausentarTurno() {
-        turno.cambiarEstado(new Ausentado(turno));
+        turno.ausentarTurno();
     }
 }

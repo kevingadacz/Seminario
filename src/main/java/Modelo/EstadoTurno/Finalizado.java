@@ -10,15 +10,19 @@ public class Finalizado implements IEstadoTurno {
     }
 
     @Override
-    public void cancelarTurno() {
+    public void cancelarTurno() throws Exception {
+        throw new Exception("El turno no se puede cancelar si ya esta finalizado");
+
     }
 
     @Override
-    public void finalizarTurno() {
+    public void finalizarTurno() throws Exception {
+        throw new Exception("El turno no se puede finalizar si ya esta finalizado");
+
     }
 
     @Override
     public void ausentarTurno() {
-        turno.cambiarEstado(new Ausentado(turno));
+        turno.ausentarTurno();
     }
 }

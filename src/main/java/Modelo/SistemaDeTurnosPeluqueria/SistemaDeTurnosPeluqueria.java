@@ -6,9 +6,24 @@ import Modelo.Servicio.Servicio;
 
 import java.util.ArrayList;
 
-public class SistemaDeTurnosPeluqueria {
+public final class SistemaDeTurnosPeluqueria {
     private ArrayList<Cliente> clientes;
     private ArrayList<Peluqueria> peluquerias;
+    private static SistemaDeTurnosPeluqueria _sistema;
+
+    public SistemaDeTurnosPeluqueria getSistema() {
+        if (_sistema != null)
+            return _sistema;
+        else{
+            _sistema = new SistemaDeTurnosPeluqueria();
+            return _sistema;
+        }
+    }
+
+    private SistemaDeTurnosPeluqueria() {
+        this.clientes = new ArrayList<>();
+        this.peluquerias = new ArrayList<>();
+    }
 
     public ArrayList<Cliente> getClientes() {
         return clientes;

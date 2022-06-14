@@ -10,17 +10,19 @@ public class Ausentado implements IEstadoTurno {
     }
 
     @Override
-    public void cancelarTurno() {
+    public void cancelarTurno() throws Exception {
+        throw new Exception("No se puede cancelar un turno ausentado");
+    }
+
+    @Override
+    public void finalizarTurno() throws Exception {
+        throw new Exception("No se puede finalizar un turno ausentado");
 
     }
 
     @Override
-    public void finalizarTurno() {
-
-    }
-
-    @Override
-    public void ausentarTurno() {
+    public void ausentarTurno() throws Exception {
+        throw new Exception("El turno ya esta ausentado");
 
     }
 }
