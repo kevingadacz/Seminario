@@ -3,7 +3,6 @@ package Modelo.Peluqueria;
 import Modelo.Calificacion.Calificacion;
 import Modelo.Cliente.Cliente;
 import Modelo.Notificable.IFormaDeNotificar;
-import Modelo.Notificable.INotificable;
 import Modelo.Notificable.Whatsapp;
 import Modelo.Servicio.Servicio;
 import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Peluqueria implements INotificable {
+public class Peluqueria {
     private int ID ;
     private String nombre;
     private String direccion;
@@ -140,10 +139,7 @@ public class Peluqueria implements INotificable {
         }
     }
 
-    @Override
-    public void notificar(String mensaje) {
-        this.formaDeNotificar.notificar(mensaje);
-    }
+    public void notificar(String mensaje) {this.formaDeNotificar.notificar(mensaje);}
 
     @Override
     public boolean equals(Object o) {

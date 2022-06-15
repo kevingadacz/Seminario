@@ -2,7 +2,6 @@ package Modelo.Cliente;
 
 import Modelo.Calificacion.Calificacion;
 import Modelo.Notificable.IFormaDeNotificar;
-import Modelo.Notificable.INotificable;
 import Modelo.Notificable.Mail;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Cliente implements INotificable {
+public class Cliente{
     private String Id;
     private String nombre;
     private String apellido;
@@ -94,7 +93,6 @@ public class Cliente implements INotificable {
         }
     }
 
-    @Override
     public void notificar(String mensaje) {
         formaDeNotificar.notificar(mensaje);
     }
