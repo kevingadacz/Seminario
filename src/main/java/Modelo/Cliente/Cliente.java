@@ -1,8 +1,7 @@
 package Modelo.Cliente;
 
-import Modelo.Calificacion.Calificacion;
-import Modelo.Notificable.IFormaDeNotificar;
-import Modelo.Notificable.Mail;
+import Modelo.FormaDeNotificar.IFormaDeNotificar;
+import Modelo.FormaDeNotificar.Mail;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
 import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
@@ -80,10 +79,6 @@ public class Cliente{
             unturno.cancelarTurno();}
         formaDeNotificar.notificar("El turno fue cancelado");
     };
-
-    public void calificarPeluqueria(Peluqueria peluqueria, int puntuacion, String comentario){
-        peluqueria.calificar(new Calificacion(puntuacion, comentario));
-    }
 
     public void asistirAlTurno(Turno turno) throws Exception {
         for(Turno unturno : turnos)if(turno == unturno){
