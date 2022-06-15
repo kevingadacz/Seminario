@@ -5,36 +5,36 @@ import Modelo.Notificable.IFormaDeNotificar;
 import Modelo.Notificable.INotificable;
 import Modelo.Notificable.Mail;
 import Modelo.Peluqueria.Peluqueria;
-import Modelo.Penalizacion.Penalizacion;
 import Modelo.Servicio.Servicio;
+import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
 import Modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Cliente implements INotificable {
-    private int Id;
+    private String Id;
     private String nombre;
     private String apellido;
     private String mail;
     private String telefono;
     private ArrayList<Turno> turnos;
-    private ArrayList<Penalizacion> penalizaciones;
     private IFormaDeNotificar formaDeNotificar;
 
 
     public Cliente(String nombre, String apellido, String mail, String telefono) {
+        this.Id =  UUID.randomUUID().toString();
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.telefono = telefono;
         this.turnos = new ArrayList<>();
-        this.penalizaciones = new ArrayList<>();
         this.formaDeNotificar = new Mail(mail);
     }
 
-    public int getID() {
+    public String getId() {
         return Id;
     }
 
@@ -58,26 +58,14 @@ public class Cliente implements INotificable {
         return turnos;
     }
 
-    public ArrayList<Penalizacion> getPenalizaciones() {
-        return penalizaciones;
-    }
-
-    /*public void penalizarjjh(){
-        if(penalizaciones.size()>2) { new Exception("No se puede solicitar un turno con 3 penalizaciones");
-        }
-
-    }*/
-
     public void confirmarTurno(Turno turno){
         turnos.add(turno);
         formaDeNotificar.notificar("El turno fue confirmado ");
     }
 
     public Turno solicitarTurno(LocalDateTime dia , Peluqueria peluqueria, Servicio servicio ) throws Exception{
-        Turno turno = new Turno(this, dia, peluqueria, servicio);
-        formaDeNotificar.notificar("Haz solicitado un turno");
-        peluqueria.solicitarTurno(turno);
-        return turno;
+        SistemaDeTurnosPeluqueria.getSistema().getPenalizador().autorizarTurno(this);
+        return peluqueria.solicitarTurno(this, dia, peluqueria, servicio);
      }
 
     public void cancelarTurno(Turno turno) throws Exception {
@@ -93,12 +81,6 @@ public class Cliente implements INotificable {
             unturno.cancelarTurno();}
         formaDeNotificar.notificar("El turno fue cancelado");
     };
-
-    /*public void penalizar(Turno turno) {
-        penalizaciones.add(new Penalizacion(turno));
-        this.notificar("Haz recibido una penalizacion");
-        turno.getPeluqueria().notificar("Se ha penalizado correctamente al cliente");
-    }*/
 
     public void calificarPeluqueria(Peluqueria peluqueria, int puntuacion, String comentario){
         peluqueria.calificar(new Calificacion(puntuacion, comentario));

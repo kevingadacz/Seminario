@@ -38,6 +38,7 @@ public class ClienteUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
             Assert.assertEquals(cliente.getTurnos().get(0), turno);
@@ -53,13 +54,14 @@ public class ClienteUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
             Turno turno2 = cliente.solicitarTurno(fecha, peluqueria, servicio);
             Assert.fail();
         }
         catch (Exception ex) {
-            Assert.assertTrue(true);
+            Assert.assertEquals(ex.getMessage(),"Turno no disponible");
         }
     }
 
@@ -70,13 +72,14 @@ public class ClienteUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
             Turno turno2 = cliente2.solicitarTurno(fecha, peluqueria, servicio);
             Assert.fail();
         }
         catch (Exception ex) {
-            Assert.assertTrue(true);
+            Assert.assertEquals(ex.getMessage(),"Turno no disponible");
         }
     }
 
@@ -86,6 +89,7 @@ public class ClienteUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
             cliente.asistirAlTurno(turno);
@@ -103,6 +107,7 @@ public class ClienteUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
             cliente.cancelarTurno(turno);
