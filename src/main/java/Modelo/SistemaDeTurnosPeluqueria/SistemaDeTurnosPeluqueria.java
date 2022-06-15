@@ -2,6 +2,7 @@ package Modelo.SistemaDeTurnosPeluqueria;
 
 import Modelo.Cliente.Cliente;
 import Modelo.Peluqueria.Peluqueria;
+import Modelo.Penalizador.Penalizador;
 import Modelo.Servicio.Servicio;
 
 import java.util.ArrayList;
@@ -10,8 +11,9 @@ public final class SistemaDeTurnosPeluqueria {
     private ArrayList<Cliente> clientes;
     private ArrayList<Peluqueria> peluquerias;
     private static SistemaDeTurnosPeluqueria _sistema;
+    private Penalizador penalizador;
 
-    public SistemaDeTurnosPeluqueria getSistema() {
+    public static SistemaDeTurnosPeluqueria getSistema() {
         if (_sistema != null)
             return _sistema;
         else{
@@ -20,9 +22,14 @@ public final class SistemaDeTurnosPeluqueria {
         }
     }
 
+    public Penalizador getPenalizador() {
+        return this.penalizador;
+    }
+
     private SistemaDeTurnosPeluqueria() {
         this.clientes = new ArrayList<>();
         this.peluquerias = new ArrayList<>();
+        this.penalizador = new Penalizador();
     }
 
     public ArrayList<Cliente> getClientes() {

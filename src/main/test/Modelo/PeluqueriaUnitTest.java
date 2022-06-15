@@ -35,14 +35,14 @@ public class PeluqueriaUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
-            Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
-            peluqueria.solicitarTurno(turno);
-            peluqueria.solicitarTurno(turno);
+            peluqueria.solicitarTurno(cliente, fecha, peluqueria, servicio);
+            peluqueria.solicitarTurno(cliente, fecha, peluqueria, servicio);
             Assert.fail();
         }
         catch (Exception ex) {
-            Assert.assertTrue(true);
+            Assert.assertEquals(ex.getMessage(),"Turno no disponible");
         }
     }
 
@@ -52,6 +52,7 @@ public class PeluqueriaUnitTest {
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(5,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria,servicio);
             peluqueria.cancelarTurno(turno);
@@ -71,15 +72,14 @@ public class PeluqueriaUnitTest {
         LocalDateTime fecha2 = LocalDateTime.now().plusMinutes(15);
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(30,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
-            Turno turno1 = new Turno(cliente, fecha1,peluqueria,servicio);
-            peluqueria.solicitarTurno(turno1);
-            Turno turno2 = new Turno(cliente2, fecha2,peluqueria,servicio);
-            peluqueria.solicitarTurno(turno2);
+            peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
+            peluqueria.solicitarTurno(cliente2, fecha2, peluqueria, servicio);
             Assert.fail();
         }
         catch (Exception ex) {
-            Assert.assertTrue(true);
+            Assert.assertEquals(ex.getMessage(),"Turno no disponible");
         }
     }
 
@@ -91,11 +91,10 @@ public class PeluqueriaUnitTest {
         LocalDateTime fecha2 = LocalDateTime.now().plusMinutes(40);
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
         Servicio servicio = new Servicio(30,"Corte de pelo");
+        peluqueria.agregarServicio(servicio);
         try {
-            Turno turno1 = new Turno(cliente, fecha1,peluqueria,servicio);
-            peluqueria.solicitarTurno(turno1);
-            Turno turno2 = new Turno(cliente2, fecha2,peluqueria,servicio);
-            peluqueria.solicitarTurno(turno2);
+            peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
+            peluqueria.solicitarTurno(cliente2, fecha2, peluqueria, servicio);
         }
         catch (Exception ex) {
             Assert.fail();

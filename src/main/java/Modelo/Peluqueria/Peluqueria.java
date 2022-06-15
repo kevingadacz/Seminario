@@ -1,10 +1,12 @@
 package Modelo.Peluqueria;
 
 import Modelo.Calificacion.Calificacion;
+import Modelo.Cliente.Cliente;
 import Modelo.Notificable.IFormaDeNotificar;
 import Modelo.Notificable.INotificable;
 import Modelo.Notificable.Whatsapp;
 import Modelo.Servicio.Servicio;
+import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
 import Modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
@@ -65,7 +67,7 @@ public class Peluqueria implements INotificable {
         this.servicios.add(servicio);
     }
     public void informarInasistencia(Turno turno){
-        //turno.getCliente().penalizar(turno);
+        SistemaDeTurnosPeluqueria.getSistema().getPenalizador().penalizar(turno);
     }
 
     public void calificar(Calificacion calificacion) {
@@ -110,16 +112,19 @@ public class Peluqueria implements INotificable {
         turnos.add(turno);
     }
 
-    public void solicitarTurno(Turno turno) throws Exception {
-        if (turnoDisponible(turno)) {
-            formaDeNotificar.notificar("Se ha solicitado un turno");
-            agregarTurno(turno);
-            turno.getCliente().confirmarTurno(turno);
-        }
-        else{
-            throw new Exception("Turno no disponible");
-        }
+    private void validaServicioDisponible(Servicio servicio) throws Exception {
+        if (!this.servicios.contains(servicio))
+            throw new Exception("La peluqueria no ofrece ese servicio");
+    }
+
+    public Turno solicitarTurno(Cliente cliente, LocalDateTime dia, Peluqueria peluqueria, Servicio servicio) throws Exception {
+        Turno turno = new Turno(cliente, dia, peluqueria, servicio);
+        validaTurnoDisponible(turno);
+        validaServicioDisponible(turno.getServicio());
+        agregarTurno(turno);
+        turno.getCliente().confirmarTurno(turno);
         formaDeNotificar.notificar("Se ha confirmado un turno");
+        return turno;
     }
 
     private boolean mismoDia(LocalDateTime dia1,LocalDateTime dia2, long duracion1, long duracion2) {
@@ -127,13 +132,12 @@ public class Peluqueria implements INotificable {
 
     }
 
-    private boolean turnoDisponible(Turno turno) {
+    private void validaTurnoDisponible(Turno turno) throws Exception {
         //Esto podria estar en un ValidadorDeTurnos
         for (Turno unTurno: turnos) {
             if(mismoDia(unTurno.getDia(),turno.getDia(),turno.getServicio().getDuracion(),unTurno.getServicio().getDuracion()))
-                return false;
+                throw new Exception("Turno no disponible");
         }
-        return true;
     }
 
     @Override
