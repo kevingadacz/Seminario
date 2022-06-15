@@ -2,6 +2,7 @@ package Modelo;
 
 import Modelo.Cliente.Cliente;
 import Modelo.EstadoTurno.Cancelado;
+import Modelo.EstadoTurno.Solicitado;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
 import Modelo.Turno.Turno;
@@ -94,7 +95,30 @@ public class PeluqueriaUnitTest {
         peluqueria.agregarServicio(servicio);
         try {
             peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
-            peluqueria.solicitarTurno(cliente2, fecha2, peluqueria, servicio);
+            Turno segundoTurno = peluqueria.solicitarTurno(cliente2, fecha2, peluqueria, servicio);
+            Assert.assertEquals(segundoTurno.getCliente(),cliente2);
+            Assert.assertEquals(segundoTurno.getDia(),fecha2);
+            Assert.assertEquals(segundoTurno.getServicio(),servicio);
+            Assert.assertEquals(segundoTurno.getPeluqueria(),peluqueria);
+        }
+        catch (Exception ex) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void SolicitarTurno_PeluqueriaTieneUnTurnoQueEstaCanceladoYSeLeSolicitaOtroEnElMismoHorario_SeGeneraElTurnoSolicitado() {
+        Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
+        Cliente cliente2 = new Cliente("Otro", "Paso", "otroPaso@fi.uba.ar", "1235342");
+        LocalDateTime fecha1 = LocalDateTime.now();
+        Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
+        Servicio servicio = new Servicio(30,"Corte de pelo",700);
+        peluqueria.agregarServicio(servicio);
+        try {
+            Turno primerTurno = peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
+            cliente.cancelarTurno(primerTurno);
+            Turno segundoTurno = peluqueria.solicitarTurno(cliente2, fecha1, peluqueria, servicio);
+            Assert.assertTrue(segundoTurno.getEstadoTurno() instanceof Solicitado);
         }
         catch (Exception ex) {
             Assert.fail();

@@ -69,14 +69,8 @@ public class Cliente{
     public void cancelarTurno(Turno turno) throws Exception {
         for(Turno unturno : turnos)if(turno == unturno) {
             unturno.cancelarTurno();
-            unturno.getPeluqueria().cancelarTurnoPedidoPorCliente(unturno);
         }
-        formaDeNotificar.notificar("El turno fue cancelado");
-    };
 
-    public void cancelarTurnoPorPeluqueria(Turno turno) throws Exception {
-        for(Turno unturno : turnos)if(turno == unturno) {
-            unturno.cancelarTurno();}
         formaDeNotificar.notificar("El turno fue cancelado");
     };
 

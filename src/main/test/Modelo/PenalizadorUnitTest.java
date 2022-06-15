@@ -19,11 +19,11 @@ public class PenalizadorUnitTest {
         peluqueria.agregarServicio(servicio);
         try {
             cliente.solicitarTurno(fecha, peluqueria, servicio);
+            Assert.assertEquals(cliente.getTurnos().get(0), peluqueria.getTurnos().get(0));
         }
         catch(Exception ex){
             Assert.assertEquals(ex.getMessage(),"El cliente no puede solicitar un turno porque ya tiene mas de 2 penalizacione");
         }
-        Assert.assertEquals(cliente.getTurnos().get(0), peluqueria.getTurnos().get(0));
     }
 
     @Test
@@ -40,12 +40,11 @@ public class PenalizadorUnitTest {
             peluqueria.informarInasistencia(turno);
 
             cliente.solicitarTurno(fechaSegundoTurno, peluqueria, servicio);
-
+            Assert.assertEquals(cliente.getTurnos().get(1), peluqueria.getTurnos().get(1));
         }
         catch(Exception ex){
             Assert.assertEquals(ex.getMessage(),"El cliente no puede solicitar un turno porque ya tiene mas de 2 penalizacione");
         }
-        Assert.assertEquals(cliente.getTurnos().get(1), peluqueria.getTurnos().get(1));
     }
 
     @Test
@@ -66,11 +65,11 @@ public class PenalizadorUnitTest {
             peluqueria.informarInasistencia(turno);
 
             cliente.solicitarTurno(fechaTercerTurno, peluqueria, servicio);
+            Assert.assertEquals(cliente.getTurnos().get(1), peluqueria.getTurnos().get(1));
         }
         catch(Exception ex){
             Assert.assertEquals(ex.getMessage(),"El cliente no puede solicitar un turno porque ya tiene mas de 2 penalizacione");
         }
-        Assert.assertEquals(cliente.getTurnos().get(1), peluqueria.getTurnos().get(1));
     }
 
     @Test
@@ -100,7 +99,5 @@ public class PenalizadorUnitTest {
         catch(Exception ex){
             Assert.assertEquals(ex.getMessage(),"El cliente no puede solicitar un turno porque ya tiene mas de 2 penalizaciones");
         }
-        Assert.assertEquals(cliente.getTurnos().get(1), peluqueria.getTurnos().get(1));
     }
-
 }

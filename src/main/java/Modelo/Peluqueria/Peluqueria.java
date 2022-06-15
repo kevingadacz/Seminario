@@ -1,6 +1,7 @@
 package Modelo.Peluqueria;
 
 import Modelo.Cliente.Cliente;
+import Modelo.EstadoTurno.Solicitado;
 import Modelo.FormaDeNotificar.IFormaDeNotificar;
 import Modelo.FormaDeNotificar.Whatsapp;
 import Modelo.Servicio.Servicio;
@@ -10,6 +11,7 @@ import Modelo.Turno.Turno;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class Peluqueria {
@@ -69,14 +71,6 @@ public class Peluqueria {
     public void cancelarTurno(Turno turno) throws Exception {
         for(Turno unturno : turnos)if(turno == unturno) {
             unturno.cancelarTurno();
-            unturno.getCliente().cancelarTurnoPorPeluqueria(turno);
-        }
-        formaDeNotificar.notificar("El turno fue cancelado");
-    }
-
-    public void cancelarTurnoPedidoPorCliente(Turno turno) throws Exception {
-        for(Turno unturno : turnos)if(turno == unturno) {
-            unturno.cancelarTurno();
         }
         formaDeNotificar.notificar("El turno fue cancelado");
     }
@@ -112,7 +106,7 @@ public class Peluqueria {
 
     private void validaTurnoDisponible(Turno turno) throws Exception {
         //Esto podria estar en un ValidadorDeTurnos
-        for (Turno unTurno: turnos) {
+        for (Turno unTurno: turnos.stream().filter(turno1 -> turno1.getEstadoTurno() instanceof Solicitado).collect(Collectors.toList())) {
             if(mismoDia(unTurno.getDia(),turno.getDia(),turno.getServicio().getDuracion(),unTurno.getServicio().getDuracion()))
                 throw new Exception("Turno no disponible");
         }
