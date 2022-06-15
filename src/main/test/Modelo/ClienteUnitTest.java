@@ -37,7 +37,7 @@ public class ClienteUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
@@ -53,7 +53,7 @@ public class ClienteUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
@@ -71,7 +71,7 @@ public class ClienteUnitTest {
         Cliente cliente2 = new Cliente("Otro", "Paso", "otroPaso@fi.uba.ar", "1235342");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
@@ -88,7 +88,7 @@ public class ClienteUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);
@@ -106,7 +106,7 @@ public class ClienteUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria, servicio);

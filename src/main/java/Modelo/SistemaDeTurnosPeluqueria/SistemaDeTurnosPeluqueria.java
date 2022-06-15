@@ -3,7 +3,6 @@ package Modelo.SistemaDeTurnosPeluqueria;
 import Modelo.Cliente.Cliente;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Penalizador.Penalizador;
-import Modelo.Servicio.Servicio;
 
 import java.util.ArrayList;
 
@@ -38,12 +37,6 @@ public final class SistemaDeTurnosPeluqueria {
 
     public ArrayList<Peluqueria> getPeluquerias() {
         return peluquerias;
-    }
-
-    public ArrayList<Peluqueria> buscarPeluqueriasPorServicio(Servicio servicio){
-        ArrayList<Peluqueria> peluqueriasbuscadas = new ArrayList<Peluqueria>();
-        for (Peluqueria peluqueria : peluquerias) {if(peluqueria.getServicios().contains(servicio))peluqueriasbuscadas.add(peluqueria);}
-        return peluqueriasbuscadas;
     }
 
     public void agregarCliente(String nombre, String apellido, String mail, String telefono){

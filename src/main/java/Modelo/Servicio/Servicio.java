@@ -3,16 +3,17 @@ package Modelo.Servicio;
 import java.util.Objects;
 
 public class Servicio {
-    private int ID;
+    private String ID;
     private int duracion;
     private String nombre;
+    private int precio;
 
-    public Servicio(int duracion, String nombre) {
+    public Servicio(int duracion, String nombre, int precio) {
         this.duracion = duracion;
         this.nombre = nombre;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 

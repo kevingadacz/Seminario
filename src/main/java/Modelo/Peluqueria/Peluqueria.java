@@ -1,10 +1,8 @@
 package Modelo.Peluqueria;
 
-import Modelo.Calificacion.Calificacion;
 import Modelo.Cliente.Cliente;
-import Modelo.Notificable.IFormaDeNotificar;
-import Modelo.Notificable.INotificable;
-import Modelo.Notificable.Whatsapp;
+import Modelo.FormaDeNotificar.IFormaDeNotificar;
+import Modelo.FormaDeNotificar.Whatsapp;
 import Modelo.Servicio.Servicio;
 import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
 import Modelo.Turno.Turno;
@@ -14,15 +12,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Peluqueria implements INotificable {
-    private int ID ;
+public class Peluqueria {
+    private String ID ;
     private String nombre;
     private String direccion;
     private String telefono;
     private String mail;
     private ArrayList<Turno> turnos;
     private ArrayList<Servicio> servicios;
-    private ArrayList<Calificacion> calificaciones;
     private IFormaDeNotificar formaDeNotificar;
 
 
@@ -33,11 +30,10 @@ public class Peluqueria implements INotificable {
         this.mail = mail;
         this.turnos = new ArrayList<Turno>();
         this.servicios = new ArrayList<Servicio>();
-        this.calificaciones = new ArrayList<Calificacion>();
         this.formaDeNotificar = new Whatsapp(telefono);
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
@@ -70,23 +66,6 @@ public class Peluqueria implements INotificable {
         SistemaDeTurnosPeluqueria.getSistema().getPenalizador().penalizar(turno);
     }
 
-    public void calificar(Calificacion calificacion) {
-        this.calificaciones.add(calificacion);
-    }
-
-    public long calcularCalificacion(){
-        int sumadepuntuaciones= 0;
-        for(Calificacion calificacion : calificaciones){sumadepuntuaciones= sumadepuntuaciones + calificacion.getPuntuacion();}
-        long cantidadDeCalificaciones = calificaciones.size();
-        return sumadepuntuaciones/cantidadDeCalificaciones;
-    }
-
-
-    public ArrayList<Turno> buscarTurnos(LocalDateTime dia){
-        ArrayList<Turno> turnosbuscados = new ArrayList<Turno>();
-        for (Turno turno: turnos) {if((turno.getDia().getDayOfYear()==dia.getDayOfYear())&&(turno.getDia().getYear() == dia.getYear()))turnosbuscados.add(turno);}
-        return turnosbuscados;
-    }
     public void cancelarTurno(Turno turno) throws Exception {
         for(Turno unturno : turnos)if(turno == unturno) {
             unturno.cancelarTurno();
@@ -101,7 +80,6 @@ public class Peluqueria implements INotificable {
         }
         formaDeNotificar.notificar("El turno fue cancelado");
     }
-
 
     public void finalizarTurno(Turno turno) throws Exception {
         for(Turno unturno : turnos)if(turno == unturno) unturno.finalizarTurno();;
@@ -140,10 +118,7 @@ public class Peluqueria implements INotificable {
         }
     }
 
-    @Override
-    public void notificar(String mensaje) {
-        this.formaDeNotificar.notificar(mensaje);
-    }
+    public void notificar(String mensaje) {this.formaDeNotificar.notificar(mensaje);}
 
     @Override
     public boolean equals(Object o) {

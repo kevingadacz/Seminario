@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Turno {
-    private int ID;
+    private String ID;
     private LocalDateTime dia;
     private Servicio servicio;
     private IEstadoTurno estadoTurno;
@@ -24,7 +24,7 @@ public class Turno {
         this.cliente = cliente;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 

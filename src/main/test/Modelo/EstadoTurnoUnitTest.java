@@ -16,7 +16,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
         IEstadoTurno solicitado = new Solicitado(turno);
         solicitado.cancelarTurno();
@@ -28,7 +28,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
         IEstadoTurno cancelado = new Cancelado(turno);
@@ -45,7 +45,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
         IEstadoTurno finalizado = new Finalizado(turno);
@@ -62,7 +62,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
         IEstadoTurno ausentado = new Ausentado(turno);
@@ -79,7 +79,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo");
+        Servicio servicio = new Servicio(5,"Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
         IEstadoTurno solicitado = new Solicitado(turno);
         solicitado.finalizarTurno();
@@ -90,7 +90,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno finalizado = new Finalizado(turno);
@@ -106,7 +106,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno cancelado = new Cancelado(turno);
@@ -122,7 +122,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno ausentado = new Ausentado(turno);
@@ -138,7 +138,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno ausentado = new Ausentado(turno);
@@ -154,7 +154,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno solicitado = new Solicitado(turno);
         solicitado.ausentarTurno();
@@ -165,7 +165,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno finalizado = new Finalizado(turno);
         finalizado.ausentarTurno();
@@ -176,7 +176,7 @@ public class EstadoTurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(5, "Corte de pelo");
+        Servicio servicio = new Servicio(5, "Corte de pelo",700);
         peluqueria.agregarServicio(servicio);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         IEstadoTurno cancelado = new Cancelado(turno);

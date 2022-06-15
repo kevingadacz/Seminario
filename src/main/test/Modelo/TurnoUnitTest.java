@@ -19,7 +19,7 @@ public class TurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(30,"Corte de pelo");
+        Servicio servicio = new Servicio(30,"Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha,peluqueria,servicio);
         Assert.assertEquals( turno.getCliente(),cliente);
         Assert.assertEquals(turno.getServicio(), servicio);
@@ -31,7 +31,7 @@ public class TurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(30, "Corte de pelo");
+        Servicio servicio = new Servicio(30, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         Assert.assertTrue(turno.getEstadoTurno() instanceof Solicitado);
     }
@@ -40,7 +40,7 @@ public class TurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(30, "Corte de pelo");
+        Servicio servicio = new Servicio(30, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         turno.finalizarTurno();
         Assert.assertTrue(turno.getEstadoTurno() instanceof Finalizado);
@@ -50,7 +50,7 @@ public class TurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(30, "Corte de pelo");
+        Servicio servicio = new Servicio(30, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         turno.cancelarTurno();
         Assert.assertTrue(turno.getEstadoTurno() instanceof Cancelado);
@@ -60,7 +60,7 @@ public class TurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(30, "Corte de pelo");
+        Servicio servicio = new Servicio(30, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         turno.ausentarTurno();
         Assert.assertTrue(turno.getEstadoTurno() instanceof Ausentado);
@@ -70,7 +70,7 @@ public class TurnoUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria", "Calle falsa 123", "1234567", "asd@a.com");
-        Servicio servicio = new Servicio(30, "Corte de pelo");
+        Servicio servicio = new Servicio(30, "Corte de pelo",700);
         Turno turno = new Turno(cliente, fecha, peluqueria, servicio);
         turno.finalizarTurno();
         turno.ausentarTurno();

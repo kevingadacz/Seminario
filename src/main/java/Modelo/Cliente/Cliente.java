@@ -1,9 +1,7 @@
 package Modelo.Cliente;
 
-import Modelo.Calificacion.Calificacion;
-import Modelo.Notificable.IFormaDeNotificar;
-import Modelo.Notificable.INotificable;
-import Modelo.Notificable.Mail;
+import Modelo.FormaDeNotificar.IFormaDeNotificar;
+import Modelo.FormaDeNotificar.Mail;
 import Modelo.Peluqueria.Peluqueria;
 import Modelo.Servicio.Servicio;
 import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Cliente implements INotificable {
+public class Cliente{
     private String Id;
     private String nombre;
     private String apellido;
@@ -82,10 +80,6 @@ public class Cliente implements INotificable {
         formaDeNotificar.notificar("El turno fue cancelado");
     };
 
-    public void calificarPeluqueria(Peluqueria peluqueria, int puntuacion, String comentario){
-        peluqueria.calificar(new Calificacion(puntuacion, comentario));
-    }
-
     public void asistirAlTurno(Turno turno) throws Exception {
         for(Turno unturno : turnos)if(turno == unturno){
             unturno.finalizarTurno();
@@ -94,7 +88,6 @@ public class Cliente implements INotificable {
         }
     }
 
-    @Override
     public void notificar(String mensaje) {
         formaDeNotificar.notificar(mensaje);
     }

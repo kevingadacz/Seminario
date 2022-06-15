@@ -1,4 +1,4 @@
-package Modelo.Notificable;
+package Modelo.FormaDeNotificar;
 
 public class Mail implements IFormaDeNotificar{
     private String mail;
