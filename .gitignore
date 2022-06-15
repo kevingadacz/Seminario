@@ -4,6 +4,9 @@
 # Log file
 *.log
 
+# Pom
+pom.xml
+
 # BlueJ files
 *.ctxt
 
