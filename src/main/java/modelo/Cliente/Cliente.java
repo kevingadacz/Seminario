@@ -1,19 +1,21 @@
-package Modelo.Cliente;
+package modelo.Cliente;
 
-import Modelo.FormaDeNotificar.IFormaDeNotificar;
-import Modelo.FormaDeNotificar.Mail;
-import Modelo.Peluqueria.Peluqueria;
-import Modelo.Servicio.Servicio;
-import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
-import Modelo.Turno.Turno;
+import modelo.FormaDeNotificar.IFormaDeNotificar;
+import modelo.FormaDeNotificar.Mail;
+import modelo.Peluqueria.Peluqueria;
+import modelo.Servicio.Servicio;
+import modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
+import modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Cliente{
-    private String Id;
+    private String id;
     private String nombre;
     private String apellido;
     private String mail;
@@ -23,7 +25,7 @@ public class Cliente{
 
 
     public Cliente(String nombre, String apellido, String mail, String telefono) {
-        this.Id =  UUID.randomUUID().toString();
+        this.id =  UUID.randomUUID().toString();
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
@@ -33,7 +35,7 @@ public class Cliente{
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public String getNombre() {
@@ -67,10 +69,12 @@ public class Cliente{
      }
 
     public void cancelarTurno(Turno turno) throws Exception {
-        for(Turno unturno : turnos)if(turno == unturno) {
-            unturno.cancelarTurno();
+        List<Turno> turnoACancelar = turnos.stream().filter(turno1 -> turno1.equals(turno)).collect(Collectors.toList());
+        if (turnoACancelar.size() == 0) {
+            throw new Exception("El turno que se intenta cancelar ya esta cancelado");
         }
 
+        turnoACancelar.get(0).cancelarTurno();
         formaDeNotificar.notificar("El turno fue cancelado");
     };
 
@@ -78,7 +82,6 @@ public class Cliente{
         for(Turno unturno : turnos)if(turno == unturno){
             unturno.finalizarTurno();
             formaDeNotificar.notificar("El turno fue finalizado");
-            unturno.getPeluqueria().finalizarTurno(unturno);
         }
     }
 
@@ -91,11 +94,11 @@ public class Cliente{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return nombre.equals(cliente.nombre) && apellido.equals(cliente.apellido) && mail.equals(cliente.mail) && telefono.equals(cliente.telefono);
+        return id.equals(cliente.id) && nombre.equals(cliente.nombre) && apellido.equals(cliente.apellido) && mail.equals(cliente.mail) && telefono.equals(cliente.telefono) && turnos.equals(cliente.turnos) && formaDeNotificar.equals(cliente.formaDeNotificar);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, apellido, mail, telefono);
+        return Objects.hash(id, nombre, apellido, mail, telefono, turnos, formaDeNotificar);
     }
 }

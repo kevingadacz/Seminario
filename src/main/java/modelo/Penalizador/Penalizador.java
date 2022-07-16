@@ -1,8 +1,8 @@
-package Modelo.Penalizador;
+package modelo.Penalizador;
 
-import Modelo.Cliente.Cliente;
-import Modelo.Penalizacion.Penalizacion;
-import Modelo.Turno.Turno;
+import modelo.Cliente.Cliente;
+import modelo.Penalizacion.Penalizacion;
+import modelo.Turno.Turno;
 import java.util.ArrayList;
 import java.util.HashMap;
 

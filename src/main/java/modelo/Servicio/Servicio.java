@@ -1,20 +1,23 @@
-package Modelo.Servicio;
-
+package modelo.Servicio;
+import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Servicio {
-    private String ID;
+    private String id;
     private int duracion;
     private String nombre;
-    private int precio;
+    private BigDecimal precio;
 
-    public Servicio(int duracion, String nombre, int precio) {
+    public Servicio(int duracion, String nombre, BigDecimal precio) {
+        this.id = UUID.randomUUID().toString();
+        this.precio = precio;
         this.duracion = duracion;
         this.nombre = nombre;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     public int getDuracion() {

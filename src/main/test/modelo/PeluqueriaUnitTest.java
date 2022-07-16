@@ -1,13 +1,15 @@
-package Modelo;
+package modelo;
 
-import Modelo.Cliente.Cliente;
-import Modelo.EstadoTurno.Cancelado;
-import Modelo.EstadoTurno.Solicitado;
-import Modelo.Peluqueria.Peluqueria;
-import Modelo.Servicio.Servicio;
-import Modelo.Turno.Turno;
+import modelo.Cliente.Cliente;
+import modelo.EstadoTurno.Cancelado;
+import modelo.EstadoTurno.Solicitado;
+import modelo.Peluqueria.Peluqueria;
+import modelo.Servicio.Servicio;
+import modelo.Turno.Turno;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -35,7 +37,7 @@ public class PeluqueriaUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo",700);
+        Servicio servicio = new Servicio(5,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             peluqueria.solicitarTurno(cliente, fecha, peluqueria, servicio);
@@ -52,13 +54,13 @@ public class PeluqueriaUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo",700);
+        Servicio servicio = new Servicio(5,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             Turno turno = cliente.solicitarTurno(fecha, peluqueria,servicio);
             peluqueria.cancelarTurno(turno);
-            Assert.assertTrue(turno.getEstadoTurno() instanceof Cancelado);
-            Assert.assertTrue(buscarTurnoDelCliente(turno, cliente).getEstadoTurno() instanceof Cancelado);
+            Assert.assertTrue(turno.getEstado() instanceof Cancelado);
+            Assert.assertTrue(buscarTurnoDelCliente(turno, cliente).getEstado() instanceof Cancelado);
         }
         catch (Exception ex) {
             Assert.fail();
@@ -72,7 +74,7 @@ public class PeluqueriaUnitTest {
         LocalDateTime fecha1 = LocalDateTime.now();
         LocalDateTime fecha2 = LocalDateTime.now().plusMinutes(15);
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(30,"Corte de pelo",700);
+        Servicio servicio = new Servicio(30,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
@@ -91,7 +93,7 @@ public class PeluqueriaUnitTest {
         LocalDateTime fecha1 = LocalDateTime.now();
         LocalDateTime fecha2 = LocalDateTime.now().plusMinutes(40);
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(30,"Corte de pelo",700);
+        Servicio servicio = new Servicio(30,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
@@ -112,13 +114,13 @@ public class PeluqueriaUnitTest {
         Cliente cliente2 = new Cliente("Otro", "Paso", "otroPaso@fi.uba.ar", "1235342");
         LocalDateTime fecha1 = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(30,"Corte de pelo",700);
+        Servicio servicio = new Servicio(30,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             Turno primerTurno = peluqueria.solicitarTurno(cliente, fecha1, peluqueria, servicio);
             cliente.cancelarTurno(primerTurno);
             Turno segundoTurno = peluqueria.solicitarTurno(cliente2, fecha1, peluqueria, servicio);
-            Assert.assertTrue(segundoTurno.getEstadoTurno() instanceof Solicitado);
+            Assert.assertTrue(segundoTurno.getEstado() instanceof Solicitado);
         }
         catch (Exception ex) {
             Assert.fail();

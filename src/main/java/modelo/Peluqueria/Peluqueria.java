@@ -1,21 +1,22 @@
-package Modelo.Peluqueria;
+package modelo.Peluqueria;
 
-import Modelo.Cliente.Cliente;
-import Modelo.EstadoTurno.Solicitado;
-import Modelo.FormaDeNotificar.IFormaDeNotificar;
-import Modelo.FormaDeNotificar.Whatsapp;
-import Modelo.Servicio.Servicio;
-import Modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
-import Modelo.Turno.Turno;
+import modelo.Cliente.Cliente;
+import modelo.EstadoTurno.Solicitado;
+import modelo.FormaDeNotificar.IFormaDeNotificar;
+import modelo.FormaDeNotificar.Whatsapp;
+import modelo.Servicio.Servicio;
+import modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
+import modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
 public class Peluqueria {
-    private String ID ;
+    private String id ;
     private String nombre;
     private String direccion;
     private String telefono;
@@ -26,6 +27,7 @@ public class Peluqueria {
 
 
     public Peluqueria(String nombre, String direccion, String telefono, String mail) {
+        this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -35,8 +37,8 @@ public class Peluqueria {
         this.formaDeNotificar = new Whatsapp(telefono);
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     public String getNombre() {
@@ -106,7 +108,7 @@ public class Peluqueria {
 
     private void validaTurnoDisponible(Turno turno) throws Exception {
         //Esto podria estar en un ValidadorDeTurnos
-        for (Turno unTurno: turnos.stream().filter(turno1 -> turno1.getEstadoTurno() instanceof Solicitado).collect(Collectors.toList())) {
+        for (Turno unTurno: turnos.stream().filter(turno1 -> turno1.getEstado() instanceof Solicitado).collect(Collectors.toList())) {
             if(mismoDia(unTurno.getDia(),turno.getDia(),turno.getServicio().getDuracion(),unTurno.getServicio().getDuracion()))
                 throw new Exception("Turno no disponible");
         }

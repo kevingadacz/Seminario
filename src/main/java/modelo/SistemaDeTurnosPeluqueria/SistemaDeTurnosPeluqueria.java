@@ -1,8 +1,8 @@
-package Modelo.SistemaDeTurnosPeluqueria;
+package modelo.SistemaDeTurnosPeluqueria;
 
-import Modelo.Cliente.Cliente;
-import Modelo.Peluqueria.Peluqueria;
-import Modelo.Penalizador.Penalizador;
+import modelo.Cliente.Cliente;
+import modelo.Peluqueria.Peluqueria;
+import modelo.Penalizador.Penalizador;
 
 import java.util.ArrayList;
 

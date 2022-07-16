@@ -1,6 +1,6 @@
-package Modelo.Penalizacion;
+package modelo.Penalizacion;
 
-import Modelo.Turno.Turno;
+import modelo.Turno.Turno;
 
 public class Penalizacion {
     private Turno turno;

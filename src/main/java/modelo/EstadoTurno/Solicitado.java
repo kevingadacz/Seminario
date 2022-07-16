@@ -1,6 +1,6 @@
-package Modelo.EstadoTurno;
+package modelo.EstadoTurno;
 
-import Modelo.Turno.Turno;
+import modelo.Turno.Turno;
 
 public class Solicitado implements IEstadoTurno {
     private Turno turno;
@@ -11,16 +11,16 @@ public class Solicitado implements IEstadoTurno {
 
     @Override
     public void cancelarTurno() throws Exception {
-        turno.cancelarTurno();
+
     }
 
     @Override
-    public void finalizarTurno() {
-        turno.finalizarTurno();
+    public void finalizarTurno() throws Exception {
+
     }
 
     @Override
-    public void ausentarTurno() {
-        turno.ausentarTurno();
+    public void ausentarTurno() throws Exception {
+
     }
 }

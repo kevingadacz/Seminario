@@ -1,4 +1,4 @@
-package Modelo.FormaDeNotificar;
+package modelo.FormaDeNotificar;
 
 public class Whatsapp implements IFormaDeNotificar{
     private String telefono;

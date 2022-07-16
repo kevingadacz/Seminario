@@ -1,6 +1,6 @@
-package Modelo.EstadoTurno;
+package modelo.EstadoTurno;
 
-import Modelo.Turno.Turno;
+import modelo.Turno.Turno;
 
 public class Ausentado implements IEstadoTurno {
     private Turno turno;
@@ -23,6 +23,5 @@ public class Ausentado implements IEstadoTurno {
     @Override
     public void ausentarTurno() throws Exception {
         throw new Exception("El turno ya esta ausentado");
-
     }
 }

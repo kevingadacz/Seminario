@@ -1,6 +1,6 @@
-package Modelo.EstadoTurno;
+package modelo.EstadoTurno;
 
-import Modelo.Turno.Turno;
+import modelo.Turno.Turno;
 
 public class Cancelado implements IEstadoTurno {
     private Turno turno;

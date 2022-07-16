@@ -1,4 +1,4 @@
-package Modelo.EstadoTurno;
+package modelo.EstadoTurno;
 
 public interface IEstadoTurno {
     public void cancelarTurno() throws Exception;

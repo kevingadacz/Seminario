@@ -1,12 +1,13 @@
-package Modelo;
+package modelo;
 
-import Modelo.Cliente.Cliente;
-import Modelo.Peluqueria.Peluqueria;
-import Modelo.Servicio.Servicio;
-import Modelo.Turno.Turno;
+import modelo.Cliente.Cliente;
+import modelo.Peluqueria.Peluqueria;
+import modelo.Servicio.Servicio;
+import modelo.Turno.Turno;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PenalizadorUnitTest {
@@ -15,7 +16,7 @@ public class PenalizadorUnitTest {
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         LocalDateTime fecha = LocalDateTime.now();
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo",700);
+        Servicio servicio = new Servicio(5,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             cliente.solicitarTurno(fecha, peluqueria, servicio);
@@ -30,7 +31,7 @@ public class PenalizadorUnitTest {
     public void SolicitarTurno_ClienteCon1PenalizacionSolicitaTurno_SeGeneraUnTurno(){
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo",700);
+        Servicio servicio = new Servicio(5,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             LocalDateTime fechaPrimerTurno = LocalDateTime.now();
@@ -51,7 +52,7 @@ public class PenalizadorUnitTest {
     public void SolicitarTurno_ClienteCon2PenalizacionesSolicitaTurno_SeGeneraUnTurno(){
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo",700);
+        Servicio servicio = new Servicio(5,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             LocalDateTime fechaPrimerTurno = LocalDateTime.now();
@@ -76,7 +77,7 @@ public class PenalizadorUnitTest {
     public void SolicitarTurno_ClienteCon3PenalizacionesSolicitaTurno_NoSeGeneraUnTurno(){
         Cliente cliente = new Cliente("Juan", "Paso", "JPaso@fi.uba.ar", "11330404");
         Peluqueria peluqueria = new Peluqueria("Una peluqueria","Calle falsa 123","1234567","asd@a.com");
-        Servicio servicio = new Servicio(5,"Corte de pelo",700);
+        Servicio servicio = new Servicio(5,"Corte de pelo",new BigDecimal(700));
         peluqueria.agregarServicio(servicio);
         try {
             LocalDateTime fechaPrimerTurno = LocalDateTime.now();
