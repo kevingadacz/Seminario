@@ -1,18 +1,19 @@
 package modelo.Servicio;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.Objects;
 import java.util.UUID;
 
 public class Servicio {
     private String id;
-    private int duracion;
+    private Duration duracion;
     private String nombre;
     private BigDecimal precio;
 
     public Servicio(int duracion, String nombre, BigDecimal precio) {
         this.id = UUID.randomUUID().toString();
         this.precio = precio;
-        this.duracion = duracion;
+        this.duracion = Duration.ofHours(duracion);
         this.nombre = nombre;
     }
 
@@ -20,7 +21,7 @@ public class Servicio {
         return id;
     }
 
-    public int getDuracion() {
+    public Duration getDuracion() {
         return duracion;
     }
 

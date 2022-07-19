@@ -109,7 +109,7 @@ public class Peluqueria {
     private void validaTurnoDisponible(Turno turno) throws Exception {
         //Esto podria estar en un ValidadorDeTurnos
         for (Turno unTurno: turnos.stream().filter(turno1 -> turno1.getEstado() instanceof Solicitado).collect(Collectors.toList())) {
-            if(mismoDia(unTurno.getDia(),turno.getDia(),turno.getServicio().getDuracion(),unTurno.getServicio().getDuracion()))
+            if(mismoDia(unTurno.getDia(),turno.getDia(),turno.getServicio().getDuracion().toHours(),unTurno.getServicio().getDuracion().toHours()))
                 throw new Exception("Turno no disponible");
         }
     }
