@@ -3,8 +3,8 @@ package modelo.Cliente;
 import modelo.FormaDeNotificar.IFormaDeNotificar;
 import modelo.FormaDeNotificar.Mail;
 import modelo.Peluqueria.Peluqueria;
+import modelo.Penalizacion.Penalizacion;
 import modelo.Servicio.Servicio;
-import modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
 import modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
@@ -22,6 +22,7 @@ public class Cliente{
     private String telefono;
     private ArrayList<Turno> turnos;
     private IFormaDeNotificar formaDeNotificar;
+    private ArrayList<Penalizacion> penalizaciones;
 
 
     public Cliente(String nombre, String apellido, String mail, String telefono) {
@@ -32,6 +33,7 @@ public class Cliente{
         this.telefono = telefono;
         this.turnos = new ArrayList<>();
         this.formaDeNotificar = new Mail(mail);
+        this.penalizaciones = new ArrayList<>();
     }
 
     public String getId() {
@@ -64,8 +66,15 @@ public class Cliente{
     }
 
     public Turno solicitarTurno(LocalDateTime dia , Peluqueria peluqueria, Servicio servicio ) throws Exception{
-        SistemaDeTurnosPeluqueria.getSistema().getPenalizador().autorizarTurno(this);
+        if (this.penalizaciones.size() > 2) {
+            throw new Exception("El cliente no puede solicitar un turno porque ya tiene mas de 2 penalizaciones");
+        }
         return peluqueria.solicitarTurno(this, dia, peluqueria, servicio);
+     }
+
+     public void penalizar(Turno turno) {
+        Penalizacion penalizacion = new Penalizacion(turno);
+         this.penalizaciones.add(penalizacion);
      }
 
     public void cancelarTurno(Turno turno) throws Exception {

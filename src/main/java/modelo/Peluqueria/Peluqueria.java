@@ -5,7 +5,6 @@ import modelo.EstadoTurno.Solicitado;
 import modelo.FormaDeNotificar.IFormaDeNotificar;
 import modelo.FormaDeNotificar.Whatsapp;
 import modelo.Servicio.Servicio;
-import modelo.SistemaDeTurnosPeluqueria.SistemaDeTurnosPeluqueria;
 import modelo.Turno.Turno;
 
 import java.time.LocalDateTime;
@@ -67,7 +66,7 @@ public class Peluqueria {
         this.servicios.add(servicio);
     }
     public void informarInasistencia(Turno turno){
-        SistemaDeTurnosPeluqueria.getSistema().getPenalizador().penalizar(turno);
+        turno.getCliente().penalizar(turno);
     }
 
     public void cancelarTurno(Turno turno) throws Exception {
